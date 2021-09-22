@@ -1,39 +1,33 @@
-local success = {}
+local p = nil
+
 RegisterNUICallback("dataPost", function(data, cb)
     SetNuiFocus(false)
-    success = data.data
-    await = false
-    cb('ok')
+    p:resolve(data.data)
+    p = nil
+    cb("ok")
 end)
 
-RegisterNUICallback("cancel", function()
+RegisterNUICallback("cancel", function(data, cb)
     SetNuiFocus(false)
-    SetNuiFocusKeepInput(false)
-    TriggerEvent('vt_core:NUI:controls', false)
-    success = nil
-    await = false
+    p:resolve(nil)
+    p = nil
+    cb("ok")
 end)
-
 
 function KeyboardInput(data)
+    Wait(150)
     if not data then return end
-    success = {}
+    if p then return end
+    
+    p = promise.new()
+
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "OPEN_MENU",
         data = data
     })
-    await = true
-    while await do Wait(0) end
-    if success ~= nil and next(success) ~= nil then
-        if #success == 1 then
-            return success[1].input
-        else
-            return success
-        end
-    else
-        return nil
-    end
+
+    return Citizen.Await(p)
 end
 
 exports("KeyboardInput", KeyboardInput)

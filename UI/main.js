@@ -36,7 +36,9 @@ function AddRow(data) {
         $('.body').append(element);
         Rows[id] = element
     }
-    document.getElementById(0).focus();
+    setTimeout(() => {
+        document.getElementById(0).focus();
+    }, 100);
 }
 
 $(`#submit`).click(() => {
@@ -49,11 +51,15 @@ function SubmitData() {
     for (var i = 0; i < RowsData.length; i++) {
         var id = RowsData[i].id
         var data = document.getElementById(id)
-
         if (data.value) {
             returnData.push({
                 _id: id,
                 input: data.value,
+            });
+        } else {
+            returnData.push({
+                _id: id,
+                input: null,
             });
         }
         $(Rows[id]).remove();
@@ -93,7 +99,7 @@ window.addEventListener("message", (evt) => {
 })
 
 
-document.onkeydown = function (event) {
+document.onkeyup = function (event) {
     event = event || window.event;
     var charCode = event.keyCode || event.which;
     if (charCode == 27) {

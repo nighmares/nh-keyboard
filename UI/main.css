@@ -69,28 +69,24 @@ html,body {
 }
 
 .body input[type="text"] {
-    background: #1e2431;
+    background: #1f2533;
     color: white;
     border: none;
 }
 
 .body input[type="text"]:focus {
-    box-shadow: 0 0 0 0.1rem#8c47b852;
+    box-shadow: 0 0 0 0.1rem#1f2533;
 }
 
 .body select {
-    background: #1e2431;
+    background: #1f2533;
     color: white;
     border: none;
 }
 
-.body select:focus {
-    box-shadow: 0 0 0 0.1rem#8c47b852;
-    background: none;
-}
 
 .body option {
-    background: #1e2431;
+    background: #1f2533;
     color: white;
     padding: 1rem 0;
 }

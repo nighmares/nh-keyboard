@@ -29,7 +29,8 @@ local keyboard = exports["nh-keyboard"]:KeyboardInput({
     }
 })
 if keyboard ~= nil then
-    TriggerEvent('additem', keyboard)
+    if keyboard[1].input == nil then return end
+    TriggerEvent('additem', keyboard[1].input)
 end
 ```
 You can also add multiple listing and it would look something like this
@@ -58,9 +59,7 @@ end
 No known bugs
 
 # Support
-Any issues feel free to contact me on the [FiveM Forums](https://forum.cfx.re/u/nerohiro/summary) or on discord `NeroHiro#0001`
-
-or feel free to report any issues you have in the GitHub [Issues](https://github.com/nerohiro/nh-keyboard/issues)
+Feel free to report any issues you have in the GitHub [Issues](https://github.com/nerohiro/nh-keyboard/issues)
 
 if you wish to add something to it, do a pull request on the github [Pull Requests](https://github.com/nerohiro/nh-keyboard/pulls)
 
